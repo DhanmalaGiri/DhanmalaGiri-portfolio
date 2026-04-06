@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dhanmala Giri – Aspiring Digital Marketer. BCA Graduate with expertise in SEO, Social Media Marketing, and Content Strategy." />
+  <meta name="keywords" content="Dhanmala Giri, Digital Marketer, SEO, Social Media Marketing, Portfolio" />
+  <meta name="author" content="Dhanmala Giri" />
+  <meta property="og:title" content="Dhanmala Giri | Aspiring Digital Marketer" />
+  <meta property="og:description" content="BCA Graduate & Digital Marketing Enthusiast | SEO, Social Media, Content Strategy" />
+  <title>Dhanmala Giri | Aspiring Digital Marketer</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Playfair Display + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    // Tailwind config
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+            mono: ['Space Mono', 'monospace'],
+          },
+          colors: {
+            gold: { 300: '#f5c842', 400: '#e6b422', 500: '#c9961a', 600: '#a87a10' },
+            cream: { 50: '#fdfaf3', 100: '#f9f3e3' },
+            ink: { 900: '#0d0f1a', 800: '#141728', 700: '#1c2035', 600: '#252945' },
+          },
+          animation: {
+            shimmer: 'shimmer 1.6s infinite linear',
+            fadeUp: 'fadeUp 0.7s ease forwards',
+            fadeIn: 'fadeIn 0.6s ease forwards',
+            ripple: 'ripple 0.6s linear',
+            countUp: 'countUp 0.5s ease',
+            progressFill: 'progressFill 1.2s ease forwards',
+          },
+          keyframes: {
+            shimmer: { '0%': { backgroundPosition: '-400px 0' }, '100%': { backgroundPosition: '400px 0' } },
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            ripple: { '0%': { transform: 'scale(0)', opacity: '0.6' }, '100%': { transform: 'scale(4)', opacity: '0' } },
+            progressFill: { '0%': { width: '0%' }, '100%': { width: 'var(--target-width)' } },
+          },
+          boxShadow: {
+            gold: '0 0 30px rgba(230,180,34,0.25)',
+            card: '0 8px 40px rgba(0,0,0,0.12)',
+            glass: '0 8px 32px rgba(0,0,0,0.15)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-family: 'DM Sans', sans-serif; }
+    body { transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+      background: linear-gradient(90deg, #e6b422, #f5c842, #c9961a);
+      width: 0%; transition: width 0.1s linear;
+    }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .dark .glass {
+      background: rgba(20,23,40,0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .light .glass-light {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* Shimmer skeleton */
+    .shimmer-bg {
+      background: linear-gradient(90deg, #e8e8e8 25%, #f8f8f8 50%, #e8e8e8 75%);
+      background-size: 800px 100%;
+      animation: shimmer 1.6s infinite linear;
+    }
+    .dark .shimmer-bg {
+      background: linear-gradient(90deg, #1c2035 25%, #252945 50%, #1c2035 75%);
+      background-size: 800px 100%;
+    }
+
+    /* Animated underline */
+    .animated-underline { position: relative; }
+    .animated-underline::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #e6b422, #f5c842);
+      transition: width 0.3s ease;
+    }
+    .animated-underline:hover::after { width: 100%; }
+
+    /* Fade-up animation class (triggered by IntersectionObserver) */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Hero gradient mesh */
+    .hero-bg {
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(230,180,34,0.15) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 80% at 20% 80%, rgba(99,102,241,0.1) 0%, transparent 70%),
+                  linear-gradient(135deg, #0d0f1a 0%, #141728 50%, #1c2035 100%);
+    }
+    .dark .hero-bg {
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(230,180,34,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 80% at 20% 80%, rgba(99,102,241,0.08) 0%, transparent 70%),
+                  linear-gradient(135deg, #0d0f1a 0%, #141728 50%, #1c2035 100%);
+    }
+
+    /* Gold gradient text */
+    .gold-text {
+      background: linear-gradient(135deg, #e6b422, #f5c842, #c9961a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Skill progress bars */
+    .skill-bar-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, #e6b422, #f5c842);
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Timeline */
+    .timeline-line { position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #e6b422, transparent); }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.3s ease;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+    /* Ripple effect */
+    .btn-ripple { position: relative; overflow: hidden; }
+    .btn-ripple .ripple-circle {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      width: 20px; height: 20px;
+      margin-top: -10px; margin-left: -10px;
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+
+    /* Nav link active */
+    .nav-link.active { color: #e6b422; }
+
+    /* Hamburger */
+    .hamburger-line { display: block; width: 24px; height: 2px; background: currentColor; transition: all 0.3s ease; }
+    .hamburger.open .hamburger-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open .hamburger-line:nth-child(2) { opacity: 0; }
+    .hamburger.open .hamburger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Card hover */
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-6px); }
+
+    /* Section heading line */
+    .section-heading::before {
+      content: ''; display: block; width: 40px; height: 3px;
+      background: linear-gradient(90deg, #e6b422, #f5c842);
+      border-radius: 2px; margin-bottom: 12px;
+    }
+
+    /* Floating label input */
+    .form-group { position: relative; }
+    .form-input { padding: 16px 14px 8px; transition: border-color 0.3s; }
+    .form-label {
+      position: absolute; top: 12px; left: 14px;
+      font-size: 14px; color: #9ca3af;
+      transition: all 0.2s ease; pointer-events: none;
+    }
+    .form-input:focus ~ .form-label,
+    .form-input:not(:placeholder-shown) ~ .form-label {
+      top: 4px; font-size: 10px; color: #e6b422;
+    }
+
+    /* Cursor dot */
+    #cursor-dot {
+      width: 8px; height: 8px; background: #e6b422; border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    #cursor-ring {
+      width: 32px; height: 32px; border: 1.5px solid rgba(230,180,34,0.5);
+      border-radius: 50%; position: fixed; pointer-events: none; z-index: 9997;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.2s, height 0.2s;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0d0f1a; }
+    ::-webkit-scrollbar-thumb { background: #e6b422; border-radius: 3px; }
+
+    /* Light mode overrides */
+    .light-mode { background-color: #fdfaf3; color: #0d0f1a; }
+
+    /* Tag pill */
+    .tag-pill {
+      font-size: 11px; font-family: 'Space Mono', monospace;
+      padding: 3px 10px; border-radius: 999px;
+      background: rgba(230,180,34,0.12); color: #c9961a;
+      border: 1px solid rgba(230,180,34,0.25);
+    }
+    .dark .tag-pill { color: #f5c842; background: rgba(230,180,34,0.1); }
+  </style>
+</head>
+
+<body id="body" class="dark bg-ink-900 text-gray-100 font-body">
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+
+  <!-- Custom Cursor (desktop only) -->
+  <div id="cursor-dot" class="hidden lg:block"></div>
+  <div id="cursor-ring" class="hidden lg:block"></div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="font-display text-xl font-bold gold-text" aria-label="Dhanmala Giri Home">DG.</a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden lg:flex items-center gap-8 text-sm font-medium" role="navigation" aria-label="Primary navigation">
+        <li><a href="#about" class="nav-link animated-underline text-gray-300 hover:text-gold-400 transition-colors">About</a></li>
+        <li><a href="#skills" class="nav-link animated-underline text-gray-300 hover:text-gold-400 transition-colors">Skills</a></li>
+        <li><a href="#projects" class="nav-link animated-underline text-gray-300 hover:text-gold-400 transition-colors">Projects</a></li>
+        <li><a href="#experience" class="nav-link animated-underline text-gray-300 hover:text-gold-400 transition-colors">Experience</a></li>
+        <li><a href="#certifications" class="nav-link animated-underline text-gray-300 hover:text-gold-400 transition-colors">Certs</a></li>
+        <li><a href="#contact" class="nav-link animated-underline text-gray-300 hover:text-gold-400 transition-colors">Contact</a></li>
+      </ul>
+
+      <!-- Right: Theme Toggle + Hamburger -->
+      <div class="flex items-center gap-4">
+        <!-- Dark/Light Toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark/light mode"
+          class="relative w-12 h-6 rounded-full bg-ink-600 border border-gold-500/30 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gold-400">
+          <span id="theme-thumb"
+            class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-gold-400 flex items-center justify-center text-ink-900 text-xs transition-all duration-300">
+            <i class="fas fa-moon text-[9px]"></i>
+          </span>
+        </button>
+
+        <!-- Mobile Hamburger -->
+        <button id="hamburger-btn" class="hamburger lg:hidden flex flex-col gap-1.5 p-1 focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden glass border-t border-white/10">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="#about" class="mobile-nav-link block text-gray-300 hover:text-gold-400 transition-colors py-1">About</a></li>
+        <li><a href="#skills" class="mobile-nav-link block text-gray-300 hover:text-gold-400 transition-colors py-1">Skills</a></li>
+        <li><a href="#projects" class="mobile-nav-link block text-gray-300 hover:text-gold-400 transition-colors py-1">Projects</a></li>
+        <li><a href="#experience" class="mobile-nav-link block text-gray-300 hover:text-gold-400 transition-colors py-1">Experience</a></li>
+        <li><a href="#certifications" class="mobile-nav-link block text-gray-300 hover:text-gold-400 transition-colors py-1">Certifications</a></li>
+        <li><a href="#contact" class="mobile-nav-link block text-gray-300 hover:text-gold-400 transition-colors py-1">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <!-- Decorative orbs -->
+    <div class="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-gold-400/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 left-1/6 w-96 h-96 rounded-full bg-indigo-500/5 blur-3xl pointer-events-none"></div>
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-5 pointer-events-none"
+      style="background-image: linear-gradient(rgba(230,180,34,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(230,180,34,0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+    <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-mono text-gold-300 mb-8 animate-fadeIn" style="animation-delay:0.2s; opacity:0; animation-fill-mode:forwards;">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        Available for Internships & Freelance
+      </div>
+
+      <!-- Name -->
+      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 animate-fadeUp" style="animation-delay:0.3s; opacity:0; animation-fill-mode:forwards;">
+        Dhanmala
+        <span class="gold-text italic"> Giri</span>
+      </h1>
+
+      <!-- Title -->
+      <p class="font-mono text-gold-400 text-sm sm:text-base tracking-[0.25em] uppercase mb-6 animate-fadeUp" style="animation-delay:0.45s; opacity:0; animation-fill-mode:forwards;">
+        Aspiring Digital Marketer
+      </p>
+
+      <!-- Intro -->
+      <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-fadeUp" style="animation-delay:0.55s; opacity:0; animation-fill-mode:forwards;">
+        BCA Graduate with a passion for building brands online — through SEO, storytelling, and data-driven campaigns that connect the right message to the right audience.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fadeUp" style="animation-delay:0.7s; opacity:0; animation-fill-mode:forwards;">
+        <a href="#projects" class="btn-ripple inline-flex items-center gap-2 bg-gold-400 hover:bg-gold-300 text-ink-900 font-semibold px-8 py-3.5 rounded-full transition-all duration-300 hover:shadow-gold hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold-400/50">
+          <i class="fas fa-eye text-sm"></i> View Projects
+        </a>
+        <a href="#" download class="btn-ripple inline-flex items-center gap-2 glass border border-gold-500/30 text-gold-300 hover:bg-gold-400/10 hover:text-gold-200 font-semibold px-8 py-3.5 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold-400/30">
+          <i class="fas fa-download text-sm"></i> Download Resume
+        </a>
+      </div>
+
+      <!-- Stats row -->
+      <div class="flex flex-wrap justify-center gap-8 mt-16 animate-fadeUp" style="animation-delay:0.85s; opacity:0; animation-fill-mode:forwards;">
+        <div class="text-center">
+          <div class="font-display text-3xl font-bold gold-text counter" data-target="5">0</div>
+          <div class="text-xs text-gray-500 mt-1 tracking-wider uppercase">Projects</div>
+        </div>
+        <div class="w-px bg-white/10 hidden sm:block"></div>
+        <div class="text-center">
+          <div class="font-display text-3xl font-bold gold-text counter" data-target="3">0</div>
+          <div class="text-xs text-gray-500 mt-1 tracking-wider uppercase">Certifications</div>
+        </div>
+        <div class="w-px bg-white/10 hidden sm:block"></div>
+        <div class="text-center">
+          <div class="font-display text-3xl font-bold gold-text counter" data-target="9">0</div>
+          <div class="text-xs text-gray-500 mt-1 tracking-wider uppercase">Skills</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce opacity-50">
+      <span class="text-xs text-gray-500 tracking-widest uppercase">Scroll</span>
+      <i class="fas fa-chevron-down text-gold-400 text-xs"></i>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="py-24 px-6 bg-ink-800 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-gold-400/3 blur-3xl pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Image + Decorative -->
+        <div class="reveal flex justify-center lg:justify-end">
+          <div class="relative">
+            <!-- Outer ring decoration -->
+            <div class="absolute -inset-4 rounded-2xl border border-gold-400/20 rotate-3"></div>
+            <div class="absolute -inset-6 rounded-2xl border border-gold-400/10 -rotate-2"></div>
+            <!-- Profile image placeholder -->
+            <div class="relative w-72 h-80 rounded-2xl overflow-hidden glass shadow-glass">
+              <div class="w-full h-full flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-ink-600 to-ink-700">
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-ink-900 text-4xl font-display font-bold shadow-gold">
+                  DG
+                </div>
+                <p class="text-gray-400 text-sm text-center px-4">[ Upload your photo here ]</p>
+              </div>
+              <!-- Gold corner accent -->
+              <div class="absolute top-0 right-0 w-12 h-12 bg-gold-400/20 blur-xl"></div>
+            </div>
+            <!-- Floating badge -->
+            <div class="absolute -bottom-4 -right-4 glass border border-gold-400/20 rounded-xl px-4 py-2 text-xs font-mono text-gold-300">
+              <i class="fas fa-graduation-cap mr-1"></i> BCA Graduate
+            </div>
+          </div>
+        </div>
+
+        <!-- Text content -->
+        <div class="reveal reveal-delay-2">
+          <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">Who I Am</p>
+          <h2 class="section-heading font-display text-4xl sm:text-5xl font-bold mb-6 leading-tight">
+            Turning Clicks<br/><span class="gold-text italic">into Conversations</span>
+          </h2>
+          <div class="space-y-4 text-gray-400 leading-relaxed">
+            <p>
+              I'm <strong class="text-gray-200">Dhanmala Giri</strong>, a BCA graduate with a deep passion for the art and science of digital marketing. My journey began with programming logic, but I quickly discovered that the most exciting code is the one that connects people — through compelling content, smart SEO, and meaningful campaigns.
+            </p>
+            <p>
+              I believe every brand has a story worth telling. My goal is to help businesses find their voice online, attract the right audience, and turn digital presence into measurable growth — whether that's through organic search, social media storytelling, or data-driven strategies.
+            </p>
+            <p>
+              Currently seeking <strong class="text-gold-300">internship or entry-level</strong> opportunities where I can grow, contribute, and make a real impact in the digital space.
+            </p>
+          </div>
+          <!-- Info pills -->
+          <div class="flex flex-wrap gap-3 mt-8">
+            <span class="tag-pill"><i class="fas fa-map-marker-alt mr-1"></i> Nepal</span>
+            <span class="tag-pill"><i class="fas fa-envelope mr-1"></i> Open to Remote</span>
+            <span class="tag-pill"><i class="fas fa-briefcase mr-1"></i> Entry Level</span>
+          </div>
+          <!-- Social links -->
+          <div class="flex gap-4 mt-8">
+            <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-400/50 hover:scale-110 transition-all duration-300">
+              <i class="fab fa-linkedin-in text-sm"></i>
+            </a>
+            <a href="#" aria-label="Twitter / X" class="w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-400/50 hover:scale-110 transition-all duration-300">
+              <i class="fab fa-x-twitter text-sm"></i>
+            </a>
+            <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-400/50 hover:scale-110 transition-all duration-300">
+              <i class="fab fa-instagram text-sm"></i>
+            </a>
+            <a href="mailto:dhanmala@email.com" aria-label="Email" class="w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-400/50 hover:scale-110 transition-all duration-300">
+              <i class="fas fa-envelope text-sm"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES / WHAT I OFFER ===================== -->
+  <section id="services" class="py-24 px-6 bg-ink-900 relative overflow-hidden">
+    <div class="absolute bottom-0 left-1/3 w-80 h-80 rounded-full bg-indigo-500/4 blur-3xl pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">What I Offer</p>
+        <h2 class="section-heading mx-auto font-display text-4xl sm:text-5xl font-bold mb-4" style="--section-heading-center:true">
+          My <span class="gold-text italic">Services</span>
+        </h2>
+        <p class="text-gray-500 max-w-xl mx-auto">A range of digital marketing services designed to build, grow, and amplify your online presence.</p>
+      </div>
+      <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Services are injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills" class="py-24 px-6 bg-ink-800 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">Capabilities</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          Skills & <span class="gold-text italic">Expertise</span>
+        </h2>
+        <p class="text-gray-500 max-w-xl mx-auto">A blend of marketing strategy and technical know-how to execute campaigns end-to-end.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Digital Marketing Skills -->
+        <div class="reveal">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center text-gold-400">
+              <i class="fas fa-chart-line text-sm"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold">Digital Marketing</h3>
+          </div>
+          <div id="dm-skills" class="space-y-5"></div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center text-gold-400">
+              <i class="fas fa-code text-sm"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold">Technical Skills</h3>
+          </div>
+          <div id="tech-skills" class="space-y-5"></div>
+        </div>
+      </div>
+
+      <!-- Skill tags -->
+      <div class="reveal mt-14 pt-10 border-t border-white/5">
+        <p class="text-center text-xs text-gray-500 font-mono tracking-widest uppercase mb-6">Also Familiar With</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="tag-pill">Google Analytics</span>
+          <span class="tag-pill">WordPress</span>
+          <span class="tag-pill">Canva</span>
+          <span class="tag-pill">Mailchimp</span>
+          <span class="tag-pill">Hootsuite</span>
+          <span class="tag-pill">Meta Ads</span>
+          <span class="tag-pill">Google Ads (Basic)</span>
+          <span class="tag-pill">Figma (Basic)</span>
+          <span class="tag-pill">Ahrefs (Basic)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects" class="py-24 px-6 bg-ink-900 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-gold-400/3 blur-3xl pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">Portfolio</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          Featured <span class="gold-text italic">Projects</span>
+        </h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Real campaigns, strategies, and creative work — click any project to explore details.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10 reveal">
+        <button class="project-filter active-filter font-mono text-xs px-5 py-2 rounded-full border border-gold-400/40 text-gold-400 hover:bg-gold-400/10 transition-all" data-filter="all">All</button>
+        <button class="project-filter font-mono text-xs px-5 py-2 rounded-full border border-white/10 text-gray-400 hover:border-gold-400/40 hover:text-gold-400 transition-all" data-filter="seo">SEO</button>
+        <button class="project-filter font-mono text-xs px-5 py-2 rounded-full border border-white/10 text-gray-400 hover:border-gold-400/40 hover:text-gold-400 transition-all" data-filter="social">Social Media</button>
+        <button class="project-filter font-mono text-xs px-5 py-2 rounded-full border border-white/10 text-gray-400 hover:border-gold-400/40 hover:text-gold-400 transition-all" data-filter="content">Content</button>
+        <button class="project-filter font-mono text-xs px-5 py-2 rounded-full border border-white/10 text-gray-400 hover:border-gold-400/40 hover:text-gold-400 transition-all" data-filter="web">Web</button>
+      </div>
+
+      <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section id="experience" class="py-24 px-6 bg-ink-800">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">Journey</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          Experience & <span class="gold-text italic">Education</span>
+        </h2>
+      </div>
+      <div id="timeline" class="relative pl-10"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CERTIFICATIONS ===================== -->
+  <section id="certifications" class="py-24 px-6 bg-ink-900 relative overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-indigo-500/5 blur-3xl pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">Credentials</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          Certifications & <span class="gold-text italic">Courses</span>
+        </h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Click on any certificate to view full details.</p>
+      </div>
+      <div id="certs-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="py-24 px-6 bg-ink-800 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-80 h-80 rounded-full bg-gold-400/4 blur-3xl pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-mono text-gold-400 text-xs tracking-[0.3em] uppercase mb-3">Get In Touch</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          Let's <span class="gold-text italic">Connect</span>
+        </h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Have a project in mind or want to discuss an opportunity? I'd love to hear from you.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Contact Info -->
+        <div class="reveal space-y-8">
+          <div>
+            <h3 class="font-display text-2xl font-semibold mb-6">Contact Information</h3>
+            <div class="space-y-5">
+              <a href="mailto:dhanmala@email.com" class="flex items-center gap-4 group">
+                <div class="w-11 h-11 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center text-gold-400 group-hover:bg-gold-400/20 transition-colors">
+                  <i class="fas fa-envelope text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-mono">Email</p>
+                  <p class="text-gray-200 group-hover:text-gold-300 transition-colors">dhanmala@email.com</p>
+                </div>
+              </a>
+              <a href="https://linkedin.com/in/dhanmalagiri" target="_blank" rel="noopener" class="flex items-center gap-4 group">
+                <div class="w-11 h-11 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center text-gold-400 group-hover:bg-gold-400/20 transition-colors">
+                  <i class="fab fa-linkedin-in text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-mono">LinkedIn</p>
+                  <p class="text-gray-200 group-hover:text-gold-300 transition-colors">linkedin.com/in/dhanmalagiri</p>
+                </div>
+              </a>
+              <div class="flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center text-gold-400">
+                  <i class="fas fa-map-marker-alt text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-mono">Location</p>
+                  <p class="text-gray-200">Nepal — Open to Remote</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Availability Card -->
+          <div class="glass border border-green-500/20 rounded-2xl p-5">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-green-400 animate-pulse flex-shrink-0"></span>
+              <div>
+                <p class="font-semibold text-green-400 text-sm">Currently Available</p>
+                <p class="text-gray-400 text-xs mt-0.5">Open to internships, part-time, and freelance projects.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="reveal reveal-delay-2">
+          <form id="contact-form" novalidate class="glass border border-white/8 rounded-2xl p-8 space-y-5">
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+
+            <!-- Name -->
+            <div class="form-group">
+              <input type="text" id="form-name" name="name" placeholder=" " required
+                class="form-input w-full bg-ink-700/50 border border-white/10 rounded-xl text-gray-100 text-sm focus:outline-none focus:border-gold-400/60 transition-colors peer" />
+              <label for="form-name" class="form-label">Your Name *</label>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <input type="email" id="form-email" name="email" placeholder=" " required
+                class="form-input w-full bg-ink-700/50 border border-white/10 rounded-xl text-gray-100 text-sm focus:outline-none focus:border-gold-400/60 transition-colors" />
+              <label for="form-email" class="form-label">Your Email *</label>
+            </div>
+
+            <!-- Subject -->
+            <div class="form-group">
+              <input type="text" id="form-subject" name="subject" placeholder=" "
+                class="form-input w-full bg-ink-700/50 border border-white/10 rounded-xl text-gray-100 text-sm focus:outline-none focus:border-gold-400/60 transition-colors" />
+              <label for="form-subject" class="form-label">Subject</label>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <textarea id="form-message" name="message" rows="4" placeholder=" " required
+                class="form-input w-full bg-ink-700/50 border border-white/10 rounded-xl text-gray-100 text-sm focus:outline-none focus:border-gold-400/60 transition-colors resize-none"></textarea>
+              <label for="form-message" class="form-label">Your Message *</label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" id="submit-btn"
+              class="btn-ripple w-full flex items-center justify-center gap-2 bg-gold-400 hover:bg-gold-300 text-ink-900 font-semibold py-3.5 rounded-xl transition-all duration-300 hover:shadow-gold disabled:opacity-60 disabled:cursor-not-allowed">
+              <span id="submit-text"><i class="fas fa-paper-plane mr-2"></i>Send Message</span>
+              <span id="submit-loading" class="hidden">
+                <i class="fas fa-circle-notch fa-spin mr-2"></i>Sending...
+              </span>
+            </button>
+
+            <!-- Messages -->
+            <div id="form-success" class="hidden flex items-center gap-3 text-green-400 text-sm bg-green-400/10 border border-green-400/20 rounded-xl p-4">
+              <i class="fas fa-check-circle flex-shrink-0"></i>
+              <p>Message sent successfully! I'll get back to you soon.</p>
+            </div>
+            <div id="form-error" class="hidden flex items-center gap-3 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-xl p-4">
+              <i class="fas fa-exclamation-circle flex-shrink-0"></i>
+              <p>Something went wrong. Please try again or email me directly.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-ink-900 border-t border-white/5 py-10 px-6 text-center">
+    <div class="max-w-5xl mx-auto">
+      <a href="#hero" class="font-display text-2xl font-bold gold-text block mb-4">DG.</a>
+      <p class="text-gray-500 text-sm mb-6">Aspiring Digital Marketer · BCA Graduate · Nepal</p>
+      <div class="flex justify-center gap-5 mb-8">
+        <a href="#" aria-label="LinkedIn" class="text-gray-500 hover:text-gold-400 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter" class="text-gray-500 hover:text-gold-400 transition-colors"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="Instagram" class="text-gray-500 hover:text-gold-400 transition-colors"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:dhanmala@email.com" aria-label="Email" class="text-gray-500 hover:text-gold-400 transition-colors"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="text-gray-600 text-xs font-mono">© 2025 Dhanmala Giri. Crafted with <span class="text-gold-400">♥</span></p>
+    </div>
+  </footer>
+
+  <!-- ===================== BACK TO TOP ===================== -->
+  <button id="back-to-top" aria-label="Back to top"
+    class="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-gold-400 text-ink-900 flex items-center justify-center shadow-gold hover:scale-110 hover:bg-gold-300 transition-all duration-300 opacity-0 pointer-events-none">
+    <i class="fas fa-arrow-up text-sm"></i>
+  </button>
+
+  <!-- ===================== MODALS CONTAINER ===================== -->
+  <!-- Project Modal -->
+  <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-project-title">
+    <div class="modal-box glass border border-white/10 rounded-2xl w-full max-w-2xl mx-4 p-8 relative">
+      <button class="modal-close absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-400 hover:text-white transition-all" aria-label="Close modal">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+      <div id="project-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Service Modal -->
+  <div id="service-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-service-title">
+    <div class="modal-box glass border border-white/10 rounded-2xl w-full max-w-lg mx-4 p-8 relative">
+      <button class="modal-close absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-400 hover:text-white transition-all" aria-label="Close modal">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+      <div id="service-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div id="cert-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-cert-title">
+    <div class="modal-box glass border border-white/10 rounded-2xl w-full max-w-md mx-4 p-8 relative">
+      <button class="modal-close absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-400 hover:text-white transition-all" aria-label="Close modal">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+      <div id="cert-modal-content"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
