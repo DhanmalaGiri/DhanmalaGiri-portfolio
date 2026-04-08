@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23111827"/><text x="50%" y="55%" text-anchor="middle" fill="%23D4AF37" font-size="40" font-family="Arial,sans-serif" dy=".3em">DG</text></svg>'>
 
   <script>
     tailwind.config = {
@@ -746,7 +747,7 @@
             <div class="relative w-72 h-80 rounded-2xl overflow-hidden card">
               <div class="profile-box w-full h-full flex flex-col items-center justify-center gap-4">
                 <div class="profile-avatar w-24 h-24 rounded-full flex items-center justify-center text-4xl font-display font-bold shadow-lg">DG</div>
-                <p class="text-xs text-center px-4 font-mono" style="color:var(--text-muted)">[ Upload your photo here ]</p>
+                <img src="./images/DhanamalaGiriHero.png" alt="Dhanmala Giri">
               </div>
             </div>
             <div class="profile-badge absolute -bottom-4 -right-4 rounded-xl px-4 py-2 text-xs font-mono flex items-center gap-2">
@@ -971,7 +972,10 @@
         <a href="#" aria-label="Instagram" class="social-btn"><i class="fab fa-instagram text-sm"></i></a>
         <a href="mailto:dhanmala@email.com" aria-label="Email" class="social-btn"><i class="fas fa-envelope text-sm"></i></a>
       </div>
-      <p class="text-xs font-mono" style="color:var(--text-muted)">© 2025 Dhanmala Giri. Crafted with <span style="color:var(--gold)">♥</span></p>
+      <p class="text-xs font-mono" style="color:var(--text-muted)">
+      © <span id="year"></span> Dhanmala Giri. Crafted with 
+      <span style="color:var(--gold)">♥</span>
+    </p>
     </div>
   </footer>
 
@@ -1001,5 +1005,8 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
